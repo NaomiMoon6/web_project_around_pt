@@ -63,6 +63,9 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userDescription.textContent = descriptionInput.value;
+
+  currentInfo.name = nameInput.value;
+  currentInfo.description =descriptionInput.value;
   closeModal(editModal);
 }
 
@@ -146,5 +149,6 @@ newForm.addEventListener('submit', handleCardFormSubmit);
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
   renderCard(placeName.value, placeImg.value, cardList);
+  evt.target.reset();
   closeModal(newModal);
 }
