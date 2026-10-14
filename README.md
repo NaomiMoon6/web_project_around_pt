@@ -1,51 +1,43 @@
-# Around The U.S. (Projeto 8)
+# Around The U.S. (Projeto 8 & 9)
 
 ## 📌 Sobre o Projeto
 
-Este projeto é a oitava etapa do desenvolvimento da aplicação web **Around The U.S.**. Trata-se de uma página web responsiva e interativa voltada para o compartilhamento de fotos de viagens e locais favoritos.
+O **Around The U.S.** é uma aplicação web interativa e responsiva voltada para o compartilhamento de fotos de viagens e locais favoritos. 
 
-Nesta fase final de front-end, a aplicação ganhou vida interativa completa com JavaScript, permitindo a manipulação dinâmica do DOM: renderização de cartões a partir de um template HTML, adição de novos locais via formulário modal, interações de curtir, exclusão de cartões e visualização de imagens ampliadas.
+Nas etapas 8 e 9 do desenvolvimento, a aplicação ganhou vida interativa completa com **JavaScript (ES6+)**. Além da manipulação dinâmica do DOM (renderização, adição, exclusão de cartões e zoom de imagens), o projeto agora conta com **validação nativa de formulários em tempo real** e **melhorias de acessibilidade e experiência do usuário (UX)** no fechamento de pop-ups.
 
 ---
 
 ## 🚀 Funcionalidades
 
-* **Renderização Dinâmica de Cartões:** Os cartões iniciais são gerados automaticamente a partir de um array de dados e de um elemento `<template>` do HTML.
+### 📸 Cartões e Manipulação do DOM (Projeto 8)
+- **Renderização Dinâmica:** Os cartões são gerados dinamicamente a partir de um array de dados inicial e de um elemento `<template>` HTML.
+- **Adição de Novos Locais:** Formulário interativo para inserção de novos cartões personalizados que aparecem no início da página.
+- **Interatividade:** Botões de curtir em formato de coração com alternância de estado e botão de lixeira para remoção direta do DOM.
+- **Zoom de Imagens:** Visualização ampliada de qualquer imagem em um pop-up dedicado ao clicar sobre ela.
 
-
-* **Tratamento de Dados Incompletos:** Uso de parâmetros padrão na criação de cartões para evitar erros caso falte nome ou imagem (utilizando imagem padrão *placeholder* e texto "Lugar sem nome").
-
-
-* **Modais Interativos:** Abertura e fechamento dinâmico de pop-ups ("Editar Perfil", "Novo Local" e "Ampliar Imagem") utilizando funções reutilizáveis (`openModal` e `closeModal`).
-
-
-* **Adição de Novos Locais:** Formulário para inserção de novos cartões personalizados que aparecem instantaneamente no início do container.
-
-
-* **Curtir Cartões:** Botões de curtir em formato de coração que mudam de cor ao serem clicados.
-
-
-* **Exclusão de Cartões:** Botões de lixeira que removem o cartão selecionado diretamente do DOM.
-
-
-* **Zoom de Imagens:** Clique na imagem de qualquer cartão para abri-la em tamanho ampliado em um pop-up dedicado.
-
-
+### 🛡️ Validação de Formulários & UX (Projeto 9)
+- **Validação de Formulário em Tempo Real:** 
+  - **Editar Perfil:** OBRIGATÓRIO — Nome (2 a 40 caracteres) e Sobre Mim (2 a 200 caracteres).
+  - **Novo Local:** OBRIGATÓRIO — Título (2 a 30 caracteres) e Link da Imagem (formato URL válido via `type="url"`).
+- **Mensagens de Erro Personalizadas:** Mensagens do navegador estilizadas com classes dedicadas (`.popup__error_visible`, `.popup__input_type_error`) abaixo de cada campo.
+- **Gerenciamento do Botão de Envio:** O botão "Salvar" ou "Criar" permanece desativado (`.popup__button_disabled`) enquanto os campos contiverem dados inválidos.
+- **Acessibilidade & UX no Fechamento de Modais:**
+  - Fechamento ao clicar na sobreposição (*overlay* / área externa ao modal).
+  - Fechamento ao pressionar a tecla **`Esc`**.
 
 ---
 
 ## 🛠️ Tecnologias e Conceitos Utilizados
 
-* **HTML5** e **CSS3** (Flexbox, Grid, Responsividade e animações de modais).
-* **JavaScript (ES6+)**:
-* Manipulação avançada do DOM.
-* Funções utilitárias e manipulação de formulários (`submit`).
-* Tratamento de eventos (`addEventListener`).
-* Uso de arrays, loops (`forEach`) e templates HTML.
-
-
-* **Metodologia BEM (Block, Element, Modifier)** para a organização do CSS na pasta `blocks`.
-* **Git e GitHub** para versionamento de código e deploy via **GitHub Pages**.
+- **HTML5** (Semântica, atributos de validação como `required`, `minlength`, `maxlength`, `type="url"`, `novalidate` e `<template>`).
+- **CSS3** (Flexbox, Grid, Responsividade, posicionamento relativo/absoluto para mensagens e estados `:disabled`).
+- **JavaScript (ES6+)**:
+  - Manipulação avançada do DOM e escutadores de eventos (`addEventListener`, eventos `input`, `submit`, `click` e `keydown`).
+  - Lógica de validação iterativa e gerenciamento de estado do botão de envio.
+  - Funções de propósito único (Clean Code) para abertura, fechamento e controle de modais.
+- **Metodologia BEM (Block, Element, Modifier)** para a organização do CSS na pasta `blocks/`.
+- **Git & GitHub** para controle de versão e deploy continuo.
 
 ---
 
