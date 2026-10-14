@@ -40,13 +40,18 @@ const currentInfo = {
   description: userDescription.textContent
 }
 
-
 function openModal(modal) {
   modal.classList.add("popup_is-opened");
 }
 
 function closeModal(modal) {
   modal.classList.remove("popup_is-opened");
+}
+
+function disableSubmitButton(modal) {
+  const submit = modal.querySelector(".popup__button");
+  submit.classList.add("popup__button_disabled");
+  submit.setAttribute("disabled", true);
 }
 
 function fillProfileForm() {
@@ -57,6 +62,7 @@ function fillProfileForm() {
 function handleOpenEditModal() {
   openModal(editModal);
   fillProfileForm();
+  disableSubmitButton(editModal);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -80,7 +86,7 @@ closeEditModal.addEventListener("click" , function (event) {
 });
 
 const cardList = document.querySelector(".cards__list");
-const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
+const cardTemplate = document.querySelector("#card-template").content;
 
 const imageModal = document.querySelector("#image-popup");
 const closeImageModal = imageModal.querySelector(".popup__close");
@@ -92,7 +98,7 @@ closeImageModal.addEventListener("click" , function (event) {
 });
 
 function getCardElement(name, link) {
-  const card = cardTemplate.cloneNode(true);
+  const card = cardTemplate.querySelector(".card").cloneNode(true);
   const title = card.querySelector(".card__title");
   const image = card.querySelector(".card__image");
   const like = card.querySelector(".card__like-button");
@@ -137,7 +143,7 @@ const placeName = newForm.querySelector(".popup__input_type_card-name");
 const placeImg = newForm.querySelector(".popup__input_type_url");
 
 openNewModal.addEventListener("click" , function (event) {
-  openModal(newModal);
+  handleOpeNewModal(newModal);
 });
 
 closeNewModal.addEventListener("click" , function (event) {
@@ -146,9 +152,97 @@ closeNewModal.addEventListener("click" , function (event) {
 
 newForm.addEventListener('submit', handleCardFormSubmit);
 
+function handleOpeNewModal() {
+  openModal(newModal);
+  if(placeName.value.trim() === "" && placeName.value.trim() === "") {disableSubmitButton(newModal);}
+}
+
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
   renderCard(placeName.value, placeImg.value, cardList);
   evt.target.reset();
+  resetForm(evt.target);
   closeModal(newModal);
+}
+
+// Projeto 9
+
+function showInputError(input, errorMessage) {
+  const errorElement = document.querySelector(`#${input.id}-error`);
+  input.classList.add("popup__input_type_error");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("popup__error_visible");
+}
+
+function hideInputError(formElement, input) {
+  const errorElement = formElement.querySelector(`#${input.id}-error`);
+  input.classList.remove("popup__input_type_error");
+  errorElement.textContent = "";
+  errorElement.classList.remove("popup__error_visible");
+}
+
+function hasInvalidInput(inputList) {
+  return Array.from(inputList).some((input) => !input.validity.valid);
+}
+
+function setFormListeners(formElement) {
+  const formInputs = formElement.querySelectorAll(".popup__input");
+  const saveButton = formElement.querySelector(".popup__button");
+
+  formInputs.forEach((input) => {
+    input.addEventListener("input", function () {
+      if (!input.validity.valid) {
+        showInputError(input, input.validationMessage);
+      } else {
+        hideInputError(formElement, input);
+      }
+
+      toggleSubmitButton(formInputs, saveButton);
+    });
+  });
+
+  formElement.addEventListener("submit", function (evt) {
+    if (!formElement.checkValidity()) {
+      evt.preventDefault();
+    }
+  });
+}
+
+function toggleSubmitButton(inputList, buttonElement) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("popup__button_disabled");
+    buttonElement.setAttribute("disabled", true);
+  } else {
+    buttonElement.classList.remove("popup__button_disabled");
+    buttonElement.removeAttribute("disabled");
+  }
+}
+
+const forms = document.querySelectorAll(".popup__form");
+
+forms.forEach((form) => {
+  setFormListeners(form);
+});
+
+const overlay = document.querySelectorAll(".popup");
+
+overlay.forEach((popup) => {
+  popup.addEventListener("click", function (event) {
+    if (event.target === popup) {
+      closeModal(popup);
+    }
+  });
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeModal(document.querySelector(".popup_is-opened"));
+  }
+});
+
+function resetForm(formElement) {
+  const formInputs = formElement.querySelectorAll(".popup__input");
+  formInputs.forEach((input) => {
+    hideInputError(formElement, input);
+  });
 }
