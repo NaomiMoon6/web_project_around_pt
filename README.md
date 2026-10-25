@@ -1,4 +1,4 @@
-# Around The U.S. (Projeto 8 & 9)
+# Around The U.S. (Projeto 8, 9 & 10)
 
 ## 📌 Sobre o Projeto
 
@@ -28,6 +28,19 @@ Nas etapas 8 e 9 do desenvolvimento, a aplicação ganhou vida interativa comple
 
 ---
 
+### 🗂️ Refatoração e Modularização (Projeto 10)
+
+- #### Programação Orientada a Objeto:
+
+  - Classe ```Card```: Responsável por criar os elementos dos cartões, gerenciar sua estrutura HTML e manipular eventos (curtir, deletar e expandir imagem).
+  - Classe ```FormValidator:``` Responsável por gerenciar a validação dinâmica dos campos dos formulários, controlar o estado do botão Submit e exibir mensagens de erro.
+
+- #### Arquitetura de Módulos (ES6 Modules):
+  - ```Card.js```: Contém a exportação da classe Card.
+  - ```FormValidator.js```: Contém a exportação da classe FormValidator.
+  - ```utils.js```: Armazena funções utilitárias para abertura, fechamento e manipuladores das janelas modais.
+  - ```index.js```: Ponto de entrada da aplicação, onde os módulos são importados e as instâncias das classes são inicializadas.
+
 ## 🛠️ Tecnologias e Conceitos Utilizados
 
 - **HTML5** (Semântica, atributos de validação como `required`, `minlength`, `maxlength`, `type="url"`, `novalidate` e `<template>`).
@@ -46,7 +59,7 @@ Nas etapas 8 e 9 do desenvolvimento, a aplicação ganhou vida interativa comple
 ```text
 ├── blocks/          # Estilos CSS organizados por blocos (Metodologia BEM)
 ├── images/          # Imagens, ícones e placeholders do projeto
-├── scripts/         # Arquivos JavaScript (index.js)[cite: 2]
+├── scripts/         # Arquivos JavaScript (index.js)
 ├── index.html       # Arquivo principal da estrutura HTML
 └── README.md        # Documentação do projeto
 
